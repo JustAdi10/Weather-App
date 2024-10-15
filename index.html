@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
 
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="card">
+        <div class="video-bg">
+            <video autoplay muted loop class="bg-video" id="bg-video">
+                <source src="Videos/Default.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
         <div class="search">
             <input type="text" placeholder="Enter City Name" spellcheck="false">
             <button><img src="images/search.png" alt="Search"></button>
@@ -51,7 +58,8 @@
         const searchBox = document.querySelector(".search input");
         const searchBtn = document.querySelector(".search button");
         const weatherIcon = document.querySelector(".weather-icon");
-        const card = document.querySelector(".card");
+        const videoElement = document.getElementById("bg-video");
+        const videoSource = videoElement.querySelector("source");
 
         async function checkWeather(city) {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -67,31 +75,30 @@
                 document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
                 document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
 
-                // Change weather icon and background
                 switch (data.weather[0].main) {
                     case "Clouds":
                         weatherIcon.src = "images/clouds.png";
-                        card.style.background = "Videos/Drizzle.mp4";
+                        changeVideo("Videos/Clouds.mp4");
                         break;
                     case "Rain":
                         weatherIcon.src = "images/rain.png";
-                        card.style.background = "Videos/Rain.mp4";
+                        changeVideo("Videos/Rain.mp4");
                         break;
                     case "Clear":
                         weatherIcon.src = "images/clear.png";
-                        card.style.background = "Videos/clear.mp4";
+                        changeVideo("Videos/Clear.mp4");
                         break;
                     case "Drizzle":
                         weatherIcon.src = "images/drizzle.png";
-                        card.style.background = "Videos/Drizzle.mp4";
+                        changeVideo("Videos/Drizzle.mp4");
                         break;
                     case "Snow":
                         weatherIcon.src = "images/snow.png";
-                        card.style.background = "Videos/snow.mp4";
+                        changeVideo("Videos/Snow.mp4");
                         break;
                     default:
                         weatherIcon.src = "images/default.png";
-                        card.style.background = "linear-gradient(135deg, #00feba, #5b548a)";
+                        changeVideo("Videos/default.mp4");
                         break;
                 }
 
@@ -100,11 +107,29 @@
             }
         }
 
+        function changeVideo(newSrc) {
+            videoElement.classList.add("fade-out");
+
+            setTimeout(() => {
+                videoSource.src = newSrc;
+                videoElement.load();
+                videoElement.classList.remove("fade-out");
+                videoElement.classList.add("fade-in");
+                videoElement.play();
+            }, 500);
+
+            setTimeout(() => {
+                videoElement.classList.remove("fade-in");
+            }, 1000);
+        }
+
         searchBtn.addEventListener("click", () => {
             checkWeather(searchBox.value);
         });
 
-        checkWeather();  // Optional: Initialize with default weather data
+        checkWeather();
     </script>
+
 </body>
+
 </html>

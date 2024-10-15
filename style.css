@@ -12,12 +12,32 @@ body {
 .card {
     width: 90%;
     max-width: 470px;
-    background: linear-gradient(135deg, #00feba, #5b548a);
-    color: #fff;
+    position: relative;
     margin: 100px auto 0;
     border-radius: 10px;
     padding: 40px 35px;
     text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: opacity 0.5s ease;
 }
 
 .search {
@@ -36,6 +56,7 @@ body {
     height: 60px;
     border-radius: 16px;
     font-size: 18px;
+    z-index: 1;
 }
 
 .search button {
@@ -46,6 +67,7 @@ body {
     width: 60px;
     height: 60px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .search button img {
@@ -55,31 +77,36 @@ body {
 .weather-icon {
     width: 170px;
     margin-top: 30px;
+    z-index: 1;     
 }
 
 .weather h1 {
     font-size: 80px;
     font-weight: 500;
+    z-index: 1;
 }
 
 .weather h2 {
     font-size: 45px;
     font-weight: 400;
     margin-top: -10px;
+    z-index: 1;
 }
 
 .details {
     display: flex;
-    aligh-items: center;
+    align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     margin-top: 50px;
+    z-index: 1;
 }
 
 .col {
     display: flex;
     align-items: center;
     text-align: left;
+    z-index: 1;
 }
 
 .col img {
@@ -91,6 +118,7 @@ body {
 .wind {
     font-size: 28px;
     margin-top: -6px;
+    z-index: 1;
 }
 
 .weather {
@@ -104,27 +132,5 @@ body {
     font-size: 14px;
     margin-top: 10px;
     display: none;
-}
-
-.bgvid{
-    width: 90%;
-    max-width: 470px;
-    background: linear-gradient(135deg, #00feba, #5b548a);
-    color: #fff;
-    margin: 100px auto 0;
-    border-radius: 10px;
-    padding: 40px 35px;
-    text-align: center;
-}
-
-.card {
-    width: 90%;
-    max-width: 470px;
-    background: linear-gradient(135deg, #00feba, #5b548a); /* Default background */
-    color: #fff;
-    margin: 100px auto 0;
-    border-radius: 10px;
-    padding: 40px 35px;
-    text-align: center;
-    transition: background 0.5s ease; 
+    z-index: 1;
 }
